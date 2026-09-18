@@ -1,0 +1,113 @@
+:root {
+  --bg: #0b1729;
+  --card: #122036;
+  --accent: #1ec77a;
+  --accent-dark: #16a866;
+  --text: #e8eef7;
+  --muted: #8aa0bb;
+  --danger: #ff5470;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(180deg, #07111f 0%, #0b1729 100%);
+  color: var(--text);
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: min(420px, 100%);
+  background: var(--card);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+header h1 { margin: 0 0 4px; font-size: 24px; }
+.muted { color: var(--muted); font-size: 13px; }
+
+form label {
+  display: block;
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+form label span { display: block; margin-bottom: 6px; }
+
+input[type="tel"],
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #233044;
+  background: #0d1726;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+input:focus { border-color: var(--accent); }
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--accent);
+  color: #06241a;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+
+button:hover:not(:disabled) { background: var(--accent-dark); }
+button:active:not(:disabled) { transform: scale(0.99); }
+button:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.result {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.result.hidden { display: none; }
+.result.success { background: rgba(30, 199, 122, 0.12); border: 1px solid rgba(30, 199, 122, 0.35); }
+.result.error { background: rgba(255, 84, 112, 0.1); border: 1px solid rgba(255, 84, 112, 0.35); }
+
+.status-check {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid #1c2a40;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.row input { flex: 1; }
+.row button { margin-top: 0; width: auto; padding: 12px 18px; }
+
+pre {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  background: #0a1422;
+  border-radius: 8px;
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}

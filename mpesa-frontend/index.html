@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>M-Pesa STK Push</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <main class="card">
+      <header>
+        <h1>M-Pesa STK Push</h1>
+        <p class="muted">Safaricom Daraja &middot; Lipa Na M-Pesa Online</p>
+      </header>
+
+      <section id="result" class="result hidden"></section>
+
+      <form id="push-form">
+        <label>
+          <span>Phone (Safaricom)</span>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="0712345678 or 2547XXXXXXXX"
+            required
+            autocomplete="tel"
+          />
+        </label>
+
+        <label>
+          <span>Amount (Ksh)</span>
+          <input id="amount" name="amount" type="number" min="1" max="250000" step="1" required value="100" />
+        </label>
+
+        <label>
+          <span>Account reference (optional)</span>
+          <input id="accountReference" name="accountReference" type="text" maxlength="12" placeholder="ORDER-001" />
+        </label>
+
+        <label>
+          <span>Description (optional)</span>
+          <input id="transactionDesc" name="transactionDesc" type="text" maxlength="13" placeholder="Payment" />
+        </label>
+
+        <button id="submit-btn" type="submit">Send STK Push</button>
+      </form>
+
+      <section class="status-check">
+        <h2>Check transaction</h2>
+        <div class="row">
+          <input id="checkoutId" type="text" placeholder="CheckoutRequestID from the push" />
+          <button id="check-btn" type="button">Query</button>
+        </div>
+        <pre id="status-out" class="muted">No lookup yet.</pre>
+      </section>
+    </main>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>
