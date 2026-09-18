@@ -1,5 +1,5 @@
 // Edit BACKEND_URL if your server isn't on the default origin during dev.
-const BACKEND_URL = "http://localhost:3000";
+const BACKEND_URL = "https://lumora-bmeu.onrender.com";
 
 const $ = (id) => document.getElementById(id);
 const form = $("push-form");
