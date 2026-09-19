@@ -189,15 +189,25 @@ export function nextTick(s: CandleSeries, asset: Asset): CandleSeries {
   const candles = s.candles.slice();
   const idx = candles.length - 1;
   const cur = { ...candles[idx] };
-  const tp = (s.tp ?? 0) + 1;
-  const ctx = { prev: cur.close, lastChange: s.lastChange ?? 0, tp };
-  const { price, change } = step(cur.close, asset, ctx, Date.now() + tp);
+
+  // The live candle moves by deterministic time-since-bucket. Every client
+  // on the planet sees the same value at the same wall-clock millisecond
+  // (no Math.random() in this path), which is what makes the chart globally
+  // consistent without any backend coordination.
+  const now = Date.now();
+  const bucketStart = cur.start;
+  const sub = Math.max(0, now - bucketStart);
+  const seed = (asset.symbol.charCodeAt(0) * 1337) ^ bucketStart ^ sub;
+
+  const ctx = { prev: cur.close, lastChange: s.lastChange ?? 0, tp: sub };
+  const { price, change } = step(cur.close, asset, ctx, seed);
   cur.close = round(price, asset.decimals);
   if (cur.close > cur.high) cur.high = cur.close;
-  if (cur.close < cur.low)  cur.low  = cur.close;
-  cur.volume += Math.abs(gauss(Date.now() + tp + 17)) * 80 + asset.volatility * 6;
+  if (cur.close < cur.low) cur.low  = cur.close;
+  cur.volume += Math.abs(gauss(seed + 73)) * 80 + asset.volatility * 6;
+
   candles[idx] = cur;
-  return { ...s, candles, lastChange: change, tp };
+  return { ...s, candles, lastChange: change, tp: sub };
 }
 
 export function rollCandle(s: CandleSeries, _asset: Asset): CandleSeries {

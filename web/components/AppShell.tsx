@@ -76,7 +76,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <header className="sticky top-0 z-40 bg-bg-900/95 border-b border-line">
         <div className="px-4 lg:px-6 h-14 flex items-center gap-4">
           <button onClick={toggle}
-                  className="press p-1.5 rounded hover:bg-bg-800 text-muted hover:text-ink"
+                  className="press p-1.5 rounded hover:bg-bg-800 text-muted hover:text-ink hidden lg:inline-flex"
                   aria-label="Toggle sidebar">
             <Icon.Menu size={18} />
           </button>
@@ -91,33 +91,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           )}
           <div className="ml-auto flex items-center gap-1 sm:gap-3">
             {mode === "real" && (
-              <>
-                <Link href="/wallet/deposit"
-                      className="press hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green text-bg-950 text-xs font-semibold hover:bg-green-bright animate-pulse-soft">
-                  <Icon.Plus size={14} /> Deposit
-                </Link>
-                <Link href="/wallet/withdraw"
-                      className="press hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-line text-xs hover:border-green-bright">
-                  <Icon.ArrowUp size={14} className="rotate-180" /> Withdraw
-                </Link>
-                <Link href="/wallet/deposit"
-                      aria-label="Deposit"
-                      className="press sm:hidden grid place-items-center w-8 h-8 rounded-md bg-green text-bg-950 hover:bg-green-bright">
-                  <Icon.Plus size={14} />
-                </Link>
-                <Link href="/wallet/withdraw"
-                      aria-label="Withdraw"
-                      className="press sm:hidden grid place-items-center w-8 h-8 rounded-md border border-line text-ink hover:border-green-bright">
-                  <Icon.ArrowUp size={14} className="rotate-180" />
-                </Link>
-              </>
+              <Link href="/wallet/deposit"
+                    className="press inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-green text-bg-950 text-xs font-semibold hover:bg-green-bright animate-pulse-soft"
+                    aria-label="Deposit">
+                <Icon.Plus size={14} /> Deposit
+              </Link>
             )}
             <Link href="/wallet" className="hidden sm:flex items-center gap-2 text-sm ml-1">
               <span className="text-muted">Balance</span>
               <span className="font-semibold tabular-nums">{usdt(realtimeBalance ?? balance)}</span>
             </Link>
             <ThemeToggle />
-            <Link href="/notifications" className="relative press px-2 py-1 text-muted hover:text-ink"
+            <Link href="/notifications"
+                  className="relative press inline-flex items-center justify-center w-8 h-8 rounded hover:bg-bg-800 text-muted hover:text-ink"
                   aria-label="Notifications">
               <Icon.Bell size={18} />
               {unread > 0 && (

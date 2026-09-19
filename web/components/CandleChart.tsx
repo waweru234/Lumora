@@ -186,7 +186,7 @@ export function CandleChart() {
           onClearStrokes={clearStrokes} strokeCount={strokes.length}
         />
 
-        <div className={`relative ${fullscreen ? "flex-1 min-h-0 grid grid-rows-[1fr_280px]" : ""}`}>
+        <div className={`relative ${fullscreen ? "flex-1 min-h-0 grid grid-rows-[1fr_auto]" : ""}`}>
           <div className={fullscreen ? "min-h-0 relative" : "relative"}>
             <svg
               ref={svgRef}
@@ -330,13 +330,19 @@ export function CandleChart() {
           </div>
 
           {fullscreen && (
-            <div className="px-3 pb-3 grid lg:grid-cols-[420px_1fr] gap-3 min-h-0">
-              <TradeBar compact />
-              <div className="rounded-2xl bg-bg-900 border border-line p-3 overflow-y-auto">
-                <p className="text-[11px] uppercase tracking-[0.2em] text-muted mb-2">Active trades</p>
-                <ActiveTrades />
+            positions.length > 0 ? (
+              <div className="px-2 pb-2 pt-1 grid grid-cols-1 md:grid-cols-[320px_1fr] gap-2 min-h-0">
+                <TradeBar compact />
+                <div className="rounded-md bg-bg-900 border border-line px-3 py-2 overflow-y-auto max-h-40 md:max-h-full">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-muted mb-1">Active trades · {positions.length}</p>
+                  <ActiveTrades />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="px-2 pb-2 pt-1">
+                <TradeBar compact />
+              </div>
+            )
           )}
         </div>
 
